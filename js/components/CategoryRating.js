@@ -12,7 +12,7 @@ class CategoryRating {
 
     template(category) {
 
-        var template = `<h3>${category.capitalize()}</h3>
+        var template = `<h3>${category.capitalize()} ${this._methods.getEmoji(category)}</h3>
                         <div class="row align-items-center">
                             <div class="col">
                                 <div class="rating ${this._methods.getColorClass(this.vals[category])}" data-value="${this.vals[category]}"></div>
@@ -59,6 +59,40 @@ class CategoryRating {
                     mind: "Mind refers to your general mental well-being. The higher the rating, the less likely it is you have a mental illness or often feel depressed, anxious, stressed, etc.",
                     social: "Social refers to your sense of belonging to social groups and friends. The higher the rating, the more enjoyable time is with friends or at exciting social events."
                 }
+            },
+            getEmoji: function(category) {
+                var src = '';
+                switch (category) {
+                    case "overall":
+                        return "";
+                        break;
+                    case "appearance":
+                        src="https://twemoji.maxcdn.com/72x72/1f484.png";
+                        break;
+                    case "environment":
+                        src="https://twemoji.maxcdn.com/72x72/1f33f.png";
+                        break;
+                    case "finance":
+                        src="https://twemoji.maxcdn.com/72x72/1f4b0.png";
+                        break;
+                    case "health":
+                        src="https://twemoji.maxcdn.com/72x72/1f489.png";
+                        break;
+                    case "love":
+                        src="https://twemoji.maxcdn.com/72x72/1f496.png";
+                        break;
+                    case "mind":
+                        src="https://twemoji.maxcdn.com/72x72/1f3ad.png";
+                        break;
+                    case "social":
+                        src="https://twemoji.maxcdn.com/72x72/1f46a.png";
+                        break;
+                }
+                return this.getImgTag(category, src);
+
+            },
+            getImgTag: function(category, src) {
+                return `<img width="36" src="${src}" alt="${category}">`;
             }
         }
     }

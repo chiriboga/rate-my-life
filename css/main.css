@@ -190,7 +190,9 @@ p {
     font-weight: bold; }
 
 .card-block {
-  text-align: left; }
+  background: #f5f7fb;
+  text-align: left;
+  color: #738196; }
 
 .flex-circles {
   color: #8795ab;
