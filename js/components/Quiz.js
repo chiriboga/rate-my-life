@@ -30,7 +30,7 @@ class Quiz {
                       $('#quiz .container').append('<button id="quiz-finish" class="btn btn-outline-success btn-lg" data-toggle="modal" data-target="#resultsModal">Get results!</button>');
                   }
               } else {
-                  $('#quiz .container').append('<button id="quiz-continue" class="btn btn-outline-primary btn-lg">Continue</button>');
+                  $('#quiz .container').append(`<button id="quiz-continue" class="btn btn-outline-primary btn-lg">Continue (${this.page + 1} of 4)</button>`);
                   return;
               }
               this.counter++;
