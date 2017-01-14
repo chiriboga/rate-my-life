@@ -35,8 +35,7 @@ p {
     font-weight: 300;
     color: #a96fff; }
   #intro p {
-    color: #8795ab;
-    margin-bottom: 2rem; }
+    color: #8795ab; }
   #intro .btn, #intro #quiz-finish {
     background: -webkit-linear-gradient(315deg, #0c9da5, #06de98);
     background: linear-gradient(135deg, #0c9da5, #06de98);
@@ -246,13 +245,13 @@ p {
   from {
     background-color: #feffd7; }
   to {
-    background-color: transparent; } }
+    background-color: white; } }
 
 @keyframes highlight {
   from {
     background-color: #feffd7; }
   to {
-    background-color: transparent; } }
+    background-color: white; } }
 
 @media (max-width: 767px) {
   header, section {
@@ -280,6 +279,16 @@ p {
       height: 35px; }
     .flex-circles .circle:nth-of-type(4), .flex-circles .circle:nth-of-type(6) {
       width: 30px;
-      height: 30px; } }
+      height: 30px; }
+  .flex-circles .circle-text {
+    position: relative;
+    width: 100%;
+    font-size: 15px; }
+    .flex-circles .circle-text:first-child {
+      left: 5%;
+      text-align: left; }
+    .flex-circles .circle-text:last-child {
+      right: 5%;
+      text-align: right; } }
 
 /*# sourceMappingURL=main.css.map */
