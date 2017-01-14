@@ -35,8 +35,7 @@ p {
     font-weight: 300;
     color: #a96fff; }
   #intro p {
-    color: #8795ab;
-    margin-bottom: 2rem; }
+    color: #8795ab; }
   #intro .btn, #intro #quiz-finish {
     background: -webkit-linear-gradient(315deg, #0c9da5, #06de98);
     background: linear-gradient(135deg, #0c9da5, #06de98);
