@@ -56,8 +56,8 @@ p {
 }
 
 #intro {
-    background: radial-gradient(circle at 13.26% 86.23%, #ffffff, transparent 100%),
-                radial-gradient(circle at 97.99% 85.98%, #e6edff, transparent 100%),
+    background: radial-gradient(circle at 13.26% 86.23%, #ffffff, rgba(255,255,255,0.001) 100%),
+                radial-gradient(circle at 97.99% 85.98%, #e6edff, rgba(255,255,255,0.001) 100%),
                 radial-gradient(circle at 50% 50%, #fffed7, #f5e6ff 100%);
     text-align: center;
     border-bottom: 1px solid #e5eeff;
@@ -338,7 +338,7 @@ $color-0: #f14545;
             height: 40px;
         }
 
-        &.--green {
+        &.is--green {
             border-color: $green;
             &:hover {
                 background-color: $green;
@@ -348,7 +348,7 @@ $color-0: #f14545;
             }
         }
 
-        &.--red {
+        &.is--red {
             border-color: $red;
             &:hover {
                 background-color: $red;

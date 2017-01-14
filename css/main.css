@@ -27,8 +27,8 @@ p {
   color: #8795ab; }
 
 #intro {
-  background: -webkit-radial-gradient(13.26% 86.23%, circle, #ffffff, transparent 100%), -webkit-radial-gradient(97.99% 85.98%, circle, #e6edff, transparent 100%), -webkit-radial-gradient(50% 50%, circle, #fffed7, #f5e6ff 100%);
-  background: radial-gradient(circle at 13.26% 86.23%, #ffffff, transparent 100%), radial-gradient(circle at 97.99% 85.98%, #e6edff, transparent 100%), radial-gradient(circle at 50% 50%, #fffed7, #f5e6ff 100%);
+  background: -webkit-radial-gradient(13.26% 86.23%, circle, #ffffff, rgba(255, 255, 255, 0.001) 100%), -webkit-radial-gradient(97.99% 85.98%, circle, #e6edff, rgba(255, 255, 255, 0.001) 100%), -webkit-radial-gradient(50% 50%, circle, #fffed7, #f5e6ff 100%);
+  background: radial-gradient(circle at 13.26% 86.23%, #ffffff, rgba(255, 255, 255, 0.001) 100%), radial-gradient(circle at 97.99% 85.98%, #e6edff, rgba(255, 255, 255, 0.001) 100%), radial-gradient(circle at 50% 50%, #fffed7, #f5e6ff 100%);
   text-align: center;
   border-bottom: 1px solid #e5eeff; }
   #intro h1 {
@@ -220,17 +220,17 @@ p {
     .flex-circles .circle:nth-of-type(4), .flex-circles .circle:nth-of-type(6) {
       width: 40px;
       height: 40px; }
-    .flex-circles .circle.--green {
+    .flex-circles .circle.is--green {
       border-color: #15c76d; }
-      .flex-circles .circle.--green:hover {
+      .flex-circles .circle.is--green:hover {
         background-color: #15c76d; }
-      .flex-circles .circle.--green:focus {
+      .flex-circles .circle.is--green:focus {
         box-shadow: 0 0 0 5px #96f3b6; }
-    .flex-circles .circle.--red {
+    .flex-circles .circle.is--red {
       border-color: #f3685a; }
-      .flex-circles .circle.--red:hover {
+      .flex-circles .circle.is--red:hover {
         background-color: #f3685a; }
-      .flex-circles .circle.--red:focus {
+      .flex-circles .circle.is--red:focus {
         box-shadow: 0 0 0 5px #ffcec9; }
     .flex-circles .circle:hover {
       background-color: #8795ab; }
