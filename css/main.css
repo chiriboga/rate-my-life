@@ -52,7 +52,8 @@ p {
       box-shadow: 0 0 0px 3px #84ffd2; }
   #intro .logo {
     width: 90%;
-    max-width: 350px; }
+    max-width: 350px;
+    height: 265px; }
 
 #quiz {
   margin-bottom: 4rem; }
