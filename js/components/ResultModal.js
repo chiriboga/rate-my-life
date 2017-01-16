@@ -6,13 +6,14 @@ class ResultModal {
     constructor(app, sum) {
         this.app = app;
         this.sum = sum;
+        this._methods = this.methods();
     }
 
     render() {
         $('#resultsModal').remove();
         $(this.app).append(this.template());
 
-        var vals = this.categoryValues();
+        var vals = this._methods.getCategoryObj();
         var categoryRating = new CategoryRating(vals);
 
         for (var category in vals) {
@@ -22,28 +23,12 @@ class ResultModal {
         }
     }
 
-    categoryValues() {
-        var sum = this.sum;
-        return {
-            overall: Math.round(100 * (sum.appearance + sum.environment + sum.finance + sum.health + sum.love + sum.mind + sum.social) / 400.5 ) / 10,
-            appearance: Math.round(100 * sum.appearance / 42) / 10,
-            environment: Math.round(100 * sum.environment / 60) / 10,
-            finance: Math.round(100 * sum.finance / 45) / 10,
-            health: Math.round(100 * sum.health / 54) / 10,
-            love: Math.round(100 * sum.love / 48) / 10,
-            mind: Math.round(100 * sum.mind / 103.5) / 10,
-            social: Math.round(100 * sum.social / 48) / 10
-        };
-    }
-
     template() {
-        var sum = this.sum;
-        var vals = this.categoryValues();
-        return `<div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        return `<div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="resultsLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Your results</h5>
+                        <h5 class="modal-title" id="resultsLabel">Your results</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -61,7 +46,27 @@ class ResultModal {
     }
 
     methods() {
-        //
+        return {
+            getCategoryRatings: function() {
+                var sum = this.sum;
+                return {
+                    overall: null,
+                    appearance: Math.round(100 * sum.appearance / 42) / 10,
+                    environment: Math.round(100 * sum.environment / 60) / 10,
+                    finance: Math.round(100 * sum.finance / 45) / 10,
+                    health: Math.round(100 * sum.health / 54) / 10,
+                    love: Math.round(100 * sum.love / 48) / 10,
+                    mind: Math.round(100 * sum.mind / 103.5) / 10,
+                    social: Math.round(100 * sum.social / 48) / 10
+                };
+            }.bind(this),
+
+            getCategoryObj: function() {
+                var r = this._methods.getCategoryRatings();
+                r.overall = Math.round(10 * (r.appearance + r.environment + r.finance + r.health + r.love + r.mind + r.social) / 7) / 10;
+                return r;
+            }.bind(this)
+        }
     }
 }
 

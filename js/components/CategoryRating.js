@@ -17,7 +17,7 @@ class CategoryRating {
                             <div class="col">
                                 <div class="rating ${this._methods.getColorClass(this.vals[category])}" data-value="${this.vals[category]}"></div>
                             </div>
-                            <div class="col-8">
+                            <div class="col-8 col-xs-12">
                                 <div class="progress">
                                   <div class="progress-bar ${this._methods.getColorClass(this.vals[category])}" role="progressbar" style="width: ${this.vals[category] * 10}%" aria-valuenow="${this.vals[category] * 10}" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
