@@ -1,14 +1,10 @@
 $(function(){
 
     /* HELPERS */
-
     require('./helpers.js');
 
     /* COMPONENTS */
-
     var Quiz = require('./components/Quiz.js');
-
-    /* ------ APP ------ */
 
     class App {
         constructor(element) {

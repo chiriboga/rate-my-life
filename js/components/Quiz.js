@@ -12,12 +12,13 @@ var ResultModal = require('../components/ResultModal.js');
 class Quiz {
     constructor(app, props) {
         this.app = app;
-        this._methods = this.methods();
         this.props = props || {};
         this.counter = 1;
         this.page = 1;
-        this.render();
+
+        this._methods = this.methods();
         this.events();
+        this.render();
     }
 
     render() {
@@ -29,7 +30,7 @@ class Quiz {
                   new Question(this.app, {
                       id: key,
                       title: quiz[key].q
-                  }).render();
+                  });
 
                   if (this.page === 1) {
                       $('.question').removeClass('highlight-anim');
@@ -55,19 +56,12 @@ class Quiz {
 
     events() {
         var quiz = this;
-        $(this.app).on('click', '.circle', function(){ quiz._methods.selectAnswer(this); });
         $(this.app).on('click', '#quiz-continue', quiz._methods.continue);
         $(this.app).on('click', '#quiz-finish', quiz._methods.finish);
     }
 
     methods() {
         return {
-            selectAnswer: function(self) {
-                $(self).siblings().removeAttr('style').removeClass('active');
-                var color = $(self).css('border-top-color');
-                $(self).css('background-color', color).addClass('active');
-            },
-
             continue: function() {
                 $('#quiz-continue').remove();
                 this.page++;
@@ -87,7 +81,7 @@ class Quiz {
             displayResults: function(results) {
                 new ResultModal(this.app, {
                     results: results
-                }).render();
+                });
             }.bind(this)
         };
     }

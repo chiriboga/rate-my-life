@@ -1,11 +1,14 @@
 /* COMPONENTS */
-
 var CategoryRating = require('../components/CategoryRating.js');
 
 class ResultModal {
     constructor(app, props) {
         this.app = app;
         this.props = props || {};
+
+        this._methods = this.methods();
+        this.events();
+        this.render();
     }
 
     render() {
@@ -22,7 +25,6 @@ class ResultModal {
                       category: category
                   });
 
-                  $('#resultsModal').find('.modal-body').append(categoryRating.render());
               }
         }
     }

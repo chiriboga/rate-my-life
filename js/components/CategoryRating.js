@@ -3,12 +3,14 @@ class CategoryRating {
     constructor(app, props) {
         this.app = app;
         this.props = props || {};
+
         this._methods = this.methods();
-        this.descriptions = this._methods.getDescriptions();
+        this.events();
+        this.render();
     }
 
     render() {
-        return this.template();
+        $('#resultsModal .modal-body').append(this.template());
     }
 
     template() {
@@ -28,7 +30,7 @@ class CategoryRating {
         if (this.props.category !== 'overall') {
             template += `<div class="card">
                               <div class="card-block">
-                                ${this.descriptions[this.props.category]}
+                                ${this._methods.getDescriptions()[this.props.category]}
                               </div>
                          </div>`;
         }

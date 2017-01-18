@@ -3,11 +3,14 @@ class Question {
     constructor(app, props) {
         this.app = app;
         this.props = props || {};
+        
         this._methods = this.methods();
+        this.events();
+        this.render();
     }
 
     render() {
-        return $('#quiz .container').append(this.template());
+        $('#quiz .container').append(this.template());
     }
 
     template() {
@@ -28,12 +31,17 @@ class Question {
     }
 
     events() {
-        //
+        var question = this;
+        $(this.app).on('click', '.circle', function(){ question._methods.selectAnswer(this); });
     }
 
     methods() {
         return {
-            //
+            selectAnswer: function(self) {
+                $(self).siblings().removeAttr('style').removeClass('active');
+                var color = $(self).css('border-top-color');
+                $(self).css('background-color', color).addClass('active');
+            }
         }
     }
 }
