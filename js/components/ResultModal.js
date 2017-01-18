@@ -15,13 +15,11 @@ class ResultModal {
         $('#resultsModal').remove();
         $(this.app).append(this.template());
 
-        var results = this.props.results;
+        for (var category in this.props.results) {
+              if (this.props.results.hasOwnProperty(category)) {
 
-        for (var category in results) {
-              if (results.hasOwnProperty(category)) {
-
-                  var categoryRating = new CategoryRating(this.app, {
-                      results: results,
+                  new CategoryRating(this.app, {
+                      results: this.props.results,
                       category: category
                   });
 
