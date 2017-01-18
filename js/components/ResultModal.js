@@ -3,22 +3,26 @@
 var CategoryRating = require('../components/CategoryRating.js');
 
 class ResultModal {
-    constructor(app, sum) {
+    constructor(app, props) {
         this.app = app;
-        this.sum = sum;
-        this._methods = this.methods();
+        this.props = props || {};
     }
 
     render() {
         $('#resultsModal').remove();
         $(this.app).append(this.template());
 
-        var vals = this._methods.getCategoryObj();
-        var categoryRating = new CategoryRating(vals);
+        var results = this.props.results;
 
-        for (var category in vals) {
-              if (vals.hasOwnProperty(category)) {
-                  $('#resultsModal').find('.modal-body').append(categoryRating.render(category));
+        for (var category in results) {
+              if (results.hasOwnProperty(category)) {
+
+                  var categoryRating = new CategoryRating(this.app, {
+                      results: results,
+                      category: category
+                  });
+
+                  $('#resultsModal').find('.modal-body').append(categoryRating.render());
               }
         }
     }
@@ -46,27 +50,7 @@ class ResultModal {
     }
 
     methods() {
-        return {
-            getCategoryRatings: function() {
-                var sum = this.sum;
-                return {
-                    overall: null,
-                    appearance: Math.round(100 * sum.appearance / 42) / 10,
-                    environment: Math.round(100 * sum.environment / 60) / 10,
-                    finance: Math.round(100 * sum.finance / 45) / 10,
-                    health: Math.round(100 * sum.health / 54) / 10,
-                    love: Math.round(100 * sum.love / 48) / 10,
-                    mind: Math.round(100 * sum.mind / 103.5) / 10,
-                    social: Math.round(100 * sum.social / 48) / 10
-                };
-            }.bind(this),
-
-            getCategoryObj: function() {
-                var r = this._methods.getCategoryRatings();
-                r.overall = Math.round(10 * (r.appearance + r.environment + r.finance + r.health + r.love + r.mind + r.social) / 7) / 10;
-                return r;
-            }.bind(this)
-        }
+        //
     }
 }
 

@@ -5,17 +5,38 @@ class RatingCalculator {
 
     getCategories() {
         return {
-            appearance: 0,
-            environment: 0,
-            finance: 0,
-            health: 0,
-            love: 0,
-            mind: 0,
-            social: 0
+            appearance: {
+                sum: 0,
+                total: 0
+            },
+            environment: {
+                sum: 0,
+                total: 0
+            },
+            finance: {
+                sum: 0,
+                total: 0
+            },
+            health: {
+                sum: 0,
+                total: 0
+            },
+            love: {
+                sum: 0,
+                total: 0
+            },
+            mind: {
+                sum: 0,
+                total: 0
+            },
+            social: {
+                sum: 0,
+                total: 0
+            }
         };
     }
 
-    sum() {
+    getCategorySums() {
         var categories = this.getCategories();
         var quiz = this.quiz;
 
@@ -32,10 +53,11 @@ class RatingCalculator {
                   var name = cat.name;
                   var weight = cat.weight;
                   if (sentiment === 'negative') {
-                      categories[name] += (reversedAnswerValues[answer] * weight);
+                      categories[name].sum += (reversedAnswerValues[answer] * weight);
                   } else {
-                      categories[name] += (answer * weight);
+                      categories[name].sum += (answer * weight);
                   }
+                  categories[name].total += (weight * 6);
               });
 
           }
@@ -43,6 +65,26 @@ class RatingCalculator {
 
         return categories;
 
+    }
+
+    getCategoryResults() {
+        var s = this.getCategorySums();
+        return {
+            overall: null,
+            appearance: Math.round(100 * s.appearance.sum / s.appearance.total) / 10,
+            environment: Math.round(100 * s.environment.sum / s.environment.total) / 10,
+            finance: Math.round(100 * s.finance.sum / s.finance.total) / 10,
+            health: Math.round(100 * s.health.sum / s.health.total) / 10,
+            love: Math.round(100 * s.love.sum / s.love.total) / 10,
+            mind: Math.round(100 * s.mind.sum / s.mind.total) / 10,
+            social: Math.round(100 * s.social.sum / s.social.total) / 10
+        };
+    }
+
+    getResultsObject() {
+        var r = this.getCategoryResults();
+        r.overall = Math.round(10 * (r.appearance + r.environment + r.finance + r.health + r.love + r.mind + r.social) / 7) / 10;
+        return r;
     }
 }
 

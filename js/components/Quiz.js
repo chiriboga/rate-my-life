@@ -1,17 +1,19 @@
 /* QUIZ JSON */
-
 var quiz = require('../quiz.js');
 var quizCache = $.extend({}, quiz);
 
 /* CLASSES */
-
 var RatingCalculator = require('../classes/RatingCalculator.js');
+
+/* COMPONENTS */
+var Question = require('../components/Question.js');
 var ResultModal = require('../components/ResultModal.js');
 
 class Quiz {
-    constructor(app) {
+    constructor(app, props) {
         this.app = app;
         this._methods = this.methods();
+        this.props = props || {};
         this.counter = 1;
         this.page = 1;
         this.render();
@@ -21,39 +23,34 @@ class Quiz {
     render() {
         for (var key in quiz) {
           if (quiz.hasOwnProperty(key)) {
+
               if (this.counter % (15 * this.page + 1) !== 0) {
-                  $('#quiz .container').append(this.template(key, quiz[key].q));
+
+                  new Question(this.app, {
+                      id: key,
+                      title: quiz[key].q
+                  }).render();
+
                   if (this.page === 1) {
                       $('.question').removeClass('highlight-anim');
                   }
                   if (this.counter === 60) {
                       $('#quiz .container').append('<button id="quiz-finish" class="btn btn-outline-success btn-lg" data-toggle="modal" data-target="#resultsModal">Get results!</button>');
                   }
+
               } else {
                   $('#quiz .container').append(`<button id="quiz-continue" class="btn btn-outline-primary btn-lg">Continue (${this.page + 1} of 4)</button>`);
                   return;
               }
+
               this.counter++;
               delete quiz[key];
           }
         }
     }
 
-    template(id, title) {
-        return `<div class="question highlight-anim" data-question-id="${id}">
-                    <h3><small>${id}.</small> ${title}</h3>
-                    <div class="d-flex flex-wrap flex-circles justify-content-center align-items-center">
-                          <div class="circle-text">Agree</div>
-                          <div class="circle is--green" tabindex="0" aria-label="Strongly agree" data-value="6"></div>
-                          <div class="circle is--green" tabindex="0" aria-label="Mostly agree" data-value="5"></div>
-                          <div class="circle is--green" tabindex="0" aria-label="Slightly agree" data-value="4"></div>
-                          <div class="circle" tabindex="0" aria-label="Neutral" data-value="3"></div>
-                          <div class="circle is--red" tabindex="0" aria-label="Slightly disagree" data-value="2"></div>
-                          <div class="circle is--red" tabindex="0" aria-label="Mostly disagree" data-value="1"></div>
-                          <div class="circle is--red" tabindex="0" aria-label="Strongly disagree" data-value="0"></div>
-                          <div class="circle-text">Disagree</div>
-                    </div>
-                </div>`;
+    template() {
+        //
     }
 
     events() {
@@ -83,13 +80,14 @@ class Quiz {
                     quizCache[id].answer = $(this).data('value');
                 });
                 var calc = new RatingCalculator(quizCache);
-                var sum = calc.sum();
-                this._methods.displayResults(sum);
+                var results = calc.getResultsObject();
+                this._methods.displayResults(results);
             }.bind(this),
 
-            displayResults: function(sum) {
-                var modal = new ResultModal(this.app, sum);
-                modal.render(sum);
+            displayResults: function(results) {
+                new ResultModal(this.app, {
+                    results: results
+                }).render();
             }.bind(this)
         };
     }

@@ -1,38 +1,39 @@
 class CategoryRating {
 
-    constructor(vals) {
-        this.vals = vals;
+    constructor(app, props) {
+        this.app = app;
+        this.props = props || {};
         this._methods = this.methods();
         this.descriptions = this._methods.getDescriptions();
     }
 
-    render(category) {
-        return this.template(category);
+    render() {
+        return this.template();
     }
 
-    template(category) {
+    template() {
 
-        var template = `<h3>${category.capitalize()} ${this._methods.getEmoji(category)}</h3>
+        var template = `<h3>${this.props.category.capitalize()} ${this._methods.getEmoji(this.props.category)}</h3>
                         <div class="row align-items-center">
                             <div class="col">
-                                <div class="rating ${this._methods.getColorClass(this.vals[category])}" data-value="${this.vals[category]}"></div>
+                                <div class="rating ${this._methods.getColorClass(this.props.results[this.props.category])}" data-value="${this.props.results[this.props.category]}"></div>
                             </div>
                             <div class="col-8 col-xs-12">
                                 <div class="progress">
-                                  <div class="progress-bar ${this._methods.getColorClass(this.vals[category])}" role="progressbar" style="width: ${this.vals[category] * 10}%" aria-valuenow="${this.vals[category] * 10}" aria-valuemin="0" aria-valuemax="100"></div>
+                                  <div class="progress-bar ${this._methods.getColorClass(this.props.results[this.props.category])}" role="progressbar" style="width: ${this.props.results[this.props.category] * 10}%" aria-valuenow="${this.props.results[this.props.category] * 10}" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>`;
 
-        if (category !== 'overall') {
+        if (this.props.category !== 'overall') {
             template += `<div class="card">
                               <div class="card-block">
-                                ${this.descriptions[category]}
+                                ${this.descriptions[this.props.category]}
                               </div>
                          </div>`;
         }
 
-        if (category !== 'social') {
+        if (this.props.category !== 'social') {
             template += `<hr>`;
         }
 
